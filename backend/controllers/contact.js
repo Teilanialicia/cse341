@@ -48,7 +48,7 @@ const getAll = async (req, res) => {
     }
 }
 
-const getSingle = async (req, res) => {
+const getSingleByEmail = async (req, res) => {
     try {
         const contact = await Contact.findOne({ email: req.params.email});
         if (!contact)
@@ -59,8 +59,22 @@ const getSingle = async (req, res) => {
     }
 }
 
+const getSingleById = async (req, res) => {
+    try {
+        const contact = await Contact.findOne({ _id: req.params.id});
+
+        if (!contact)
+            return res.status(400).json({ error: 'That contact does not exist' });
+
+        return res.status(200).json({contact});
+    } catch (err) {
+        res.status(500).json({ error: 'Server Error' });
+    }
+}
+
 module.exports = {
     createContact, 
     getAll, 
-    getSingle
+    getSingleByEmail,
+    getSingleById
 }

@@ -8,7 +8,11 @@ route.post('/', contactController.createContact);
 // Get request for all contacts
 route.get('/', contactController.getAll);
 
-// Get request for one contact
-route.get('/:email', contactController.getSingle);
+// Get request for one contact by email
+route.get('/email/:email', contactController.getSingleByEmail);
+
+// Get request for one contact by id
+route.get('/id/:id', contactController.getSingleById);
+
 
 module.exports = route;
