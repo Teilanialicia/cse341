@@ -8,7 +8,7 @@
 const express = require("express");
 const env = require("dotenv").config();
 const app = express();
-const connectDb = require("./models/connection");
+const connectDb = require("./routes/data/database");
 const cors = require('cors');
 
 
@@ -18,12 +18,11 @@ const cors = require('cors');
  *************************/
 const port = process.env.PORT;
 const host = process.env.HOST;
-const connectionString = process.env.DB_CONNECTION_STRING;
 
 /* ***********************
  * Database
  *************************/
-connectDb(connectionString);
+connectDb();
 
 
 /* ***********************
@@ -35,9 +34,7 @@ app.use(cors());
 /* ***********************
  * Routes
  *************************/
-//      API url path              Route code to use
-app.use('/api/user', require('./api/user'));
-app.use('/api/professional', require('./api/professional'));
+app.use('/', require('./routes'));
 
 
 /* ***********************
