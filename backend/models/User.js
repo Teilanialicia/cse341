@@ -6,6 +6,9 @@ const user = new mongoose.Schema({
     },
     lastName:{
         type:String
+    },
+    email:{
+        type:String
     }
 })
 

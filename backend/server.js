@@ -9,6 +9,8 @@ const express = require("express");
 const env = require("dotenv").config();
 const app = express();
 const connectDb = require("./models/connection");
+const cors = require('cors');
+
 
 /* ***********************
  * Local Server Information
@@ -28,12 +30,14 @@ connectDb(connectionString);
  * Express Setup
  *************************/
 app.use(express.json({ extended: false }));
+app.use(cors());
 
 /* ***********************
  * Routes
  *************************/
 //      API url path              Route code to use
-app.use('/api/userModel', require('./api/user'));
+app.use('/api/user', require('./api/user'));
+app.use('/api/professional', require('./api/professional'));
 
 
 /* ***********************
