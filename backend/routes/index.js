@@ -9,7 +9,7 @@ router.use('/', require('./swagger'));
 
 router.get('/', (req, res) => {
     // Redirects the user to the api-docs to see what they can use
-    res.redirect('/swagger/api-docs');
+    res.redirect('/api-docs');
 })
 
 module.exports = router;
