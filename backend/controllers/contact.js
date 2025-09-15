@@ -6,13 +6,13 @@ const createContact = async (req, res) => {
 
     // Validate the body
     if (!firstName || !lastName || !email || !color || !birthday) {
-        return res.status(400).json({ error: 'First name, last name, email, favorite color, and birthday are required' });
+        return res.status(400).json({ message: 'First name, last name, email, favorite color, and birthday are required' });
     }
 
     // Validate the email to make sure its an email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-        return res.status(400).json({ error: 'Invalid email format' });
+        return res.status(400).json({message: 'Invalid email format'});
     }
 
     // Set up the contact "template" object
@@ -26,7 +26,7 @@ const createContact = async (req, res) => {
     const existingContact = await Contact.findOne({ email: contact.email });
     // Check if a contact with that email already exists
     if (existingContact)
-        return res.status(400).json({ error: 'A contact with this email already exists' });
+        return res.status(400).json({message: 'A contact with this email already exists'});
 
     // Attempt to add the contact
     try {
@@ -34,7 +34,7 @@ const createContact = async (req, res) => {
         await contactModel.save();
         res.json(contactModel);
     } catch (err) {
-        res.status(500).json({ error: 'Unable to add new contact' });
+        res.status(500).json({message: 'Unable to add new contact', error: err});
     }
 }
 
@@ -45,7 +45,7 @@ const getAll = async (req, res) => {
         res.status(200).json(contacts);
     } catch (err) {
         console.error(err);
-        res.status(500).json({ error: 'Failed to fetch contacts' });
+        res.status(500).json({message: 'Failed to fetch contacts', error: err});
     }
 }
 
@@ -57,7 +57,7 @@ const getSingleByEmail = async (req, res) => {
             throw Error()
         res.status(200).json({contact});
     } catch (err) {
-        res.status(500).json({ error: 'That contact does not exist' });
+        res.status(500).json({message: 'That contact does not exist', error: err});
     }
 }
 
@@ -67,11 +67,11 @@ const getSingleById = async (req, res) => {
         const contact = await Contact.findOne({ _id: req.params.id});
 
         if (!contact)
-            return res.status(400).json({ error: 'That contact does not exist' });
+            return res.status(400).json({message: 'That contact id does not exist', error: err});
 
         return res.status(200).json({contact});
     } catch (err) {
-        res.status(500).json({ error: 'Server Error' });
+        res.status(500).json({message: 'Server Error', error: err});
     }
 }
 
@@ -93,12 +93,12 @@ const updateByEmail = async (req, res) => {
         const contact = await Contact.updateOne({ email: email}, {$set: updateFields});
         
         if (!contact)
-            return res.status(400).json({ error: 'That email does not exist' });
+            return res.status(400).json({ message: 'That email does not exist', error: err });
 
         return res.status(200).json({error: `Updated contact with email: ${email}`});
     } catch (err) {
         console.log(err);
-        return res.status(404).json({error: 'No contact found with that email. No update occurred.'});
+        return res.status(404).json({message: 'No contact found with that email. No update occurred.', error: err});
     }
 }
 
@@ -120,11 +120,11 @@ const updateById = async (req, res) => {
         const contact = await Contact.updateOne({ _id: id}, {$set: updateFields});
 
         if (!contact)
-            return res.status(400).json({ error: 'That Id does not exist' });
+            return res.status(400).json({ message: 'That Id does not exist', error: err });
 
         return res.status(200).json({Response: `Updated contact with id: ${id}`});
     } catch (err) {
-        return res.status(404).json({error: 'No contact found with that id. No update occurred.'});
+        return res.status(404).json({message: 'No contact found with that id. No update occurred.', error: err});
     }
 }
 
@@ -135,11 +135,11 @@ const deleteByEmail = async (req, res) => {
         const contact = await Contact.deleteOne({ email: email});
 
         if (!contact)
-            return res.status(400).json({ error: 'That email does not exist' });
+            return res.status(400).json({message: 'That email does not exist', error: err});
 
         return res.status(200).json({error: `Deleted contact with email: ${email}`});
     } catch (err) {
-        return res.status(400).json({error: 'No contact found with that email. No delete occurred.'});
+        return res.status(400).json({message: 'No contact found with that email. No delete occurred.', error: err});
     }
 }
 
@@ -150,11 +150,11 @@ const deleteById = async (req, res) => {
         const contact = await Contact.deleteOne({ _id: id});
         
         if (!contact)
-            return res.status(400).json({ error: 'That Id does not exist' });
+            return res.status(400).json({message: 'That Id does not exist', error: err});
 
         return res.status(200).json({error: `Deleted contact with id: ${id}`});
     } catch (err) {
-        return res.status(400).json({error: 'No contact found with that id. No delete occurred.'});
+        return res.status(400).json({message: 'No contact found with that id. No delete occurred.', error: err});
     }
 }
 
