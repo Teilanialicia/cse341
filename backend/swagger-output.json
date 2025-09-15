@@ -5,12 +5,22 @@
     "description": "Description",
     "version": "1.0.0"
   },
-  "host": "https://cse341-rdp3.onrender.com",
+  "host": "cse341-rdp3.onrender.com",
   "basePath": "/",
   "schemes": [
     "https"
   ],
   "paths": {
+    "/": {
+      "get": {
+        "description": "",
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        }
+      }
+    },
     "/contact/": {
       "post": {
         "tags": [
@@ -333,16 +343,6 @@
         "responses": {
           "default": {
             "description": ""
-          }
-        }
-      }
-    },
-    "/": {
-      "get": {
-        "description": "",
-        "responses": {
-          "200": {
-            "description": "OK"
           }
         }
       }

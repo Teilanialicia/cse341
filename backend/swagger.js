@@ -9,7 +9,7 @@ const doc = {
     title: 'My API',
     description: 'Description'
   },
-  host: 'https://cse341-rdp3.onrender.com',
+  host: 'cse341-rdp3.onrender.com',
   schemes: ['https']
 };
 
