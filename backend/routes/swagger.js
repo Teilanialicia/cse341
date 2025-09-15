@@ -5,8 +5,4 @@ const swaggerDocument = require('../swagger-output.json');
 router.use('/api-docs', swaggerUi.serve);
 router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
-router.get('/', (req, res) => {
-    res.send("Hello world!");
-})
-
 module.exports = router;
