@@ -90,11 +90,15 @@ const updateByEmail = async (req, res) => {
         if (Object.keys(updateFields).length == 0)
             return res.status(400).json({error: 'No updated fields provided.'});
 
-        await Contact.updateOne({ email: email}, {$set: updateFields});
+        const contact = await Contact.updateOne({ email: email}, {$set: updateFields});
+        
+        if (!contact)
+            return res.status(400).json({ error: 'That email does not exist' });
+
         return res.status(200).json({error: `Updated contact with email: ${email}`});
     } catch (err) {
         console.log(err);
-        return res.status(404).json({error: 'No contact found with that email. No delete occurred.'});
+        return res.status(404).json({error: 'No contact found with that email. No update occurred.'});
     }
 }
 
@@ -113,10 +117,14 @@ const updateById = async (req, res) => {
         if (Object.keys(updateFields).length == 0)
             return res.status(400).json({error: 'No updated fields provided.'});
 
-        await Contact.updateOne({ _id: id}, {$set: updateFields});
+        const contact = await Contact.updateOne({ _id: id}, {$set: updateFields});
+
+        if (!contact)
+            return res.status(400).json({ error: 'That Id does not exist' });
+
         return res.status(200).json({Response: `Updated contact with id: ${id}`});
     } catch (err) {
-        return res.status(404).json({error: 'No contact found with that id. No delete occurred.'});
+        return res.status(404).json({error: 'No contact found with that id. No update occurred.'});
     }
 }
 
@@ -124,7 +132,11 @@ const deleteByEmail = async (req, res) => {
     //#swagger.tags=['Contacts']
     try {
         const {email} = req.body;
-        await Contact.deleteOne({ email: email});
+        const contact = await Contact.deleteOne({ email: email});
+
+        if (!contact)
+            return res.status(400).json({ error: 'That email does not exist' });
+
         return res.status(200).json({error: `Deleted contact with email: ${email}`});
     } catch (err) {
         return res.status(400).json({error: 'No contact found with that email. No delete occurred.'});
@@ -135,7 +147,11 @@ const deleteById = async (req, res) => {
     //#swagger.tags=['Contacts']
     try {
         const {id} = req.body;
-        await Contact.deleteOne({ _id: id});
+        const contact = await Contact.deleteOne({ _id: id});
+        
+        if (!contact)
+            return res.status(400).json({ error: 'That Id does not exist' });
+
         return res.status(200).json({error: `Deleted contact with id: ${id}`});
     } catch (err) {
         return res.status(400).json({error: 'No contact found with that id. No delete occurred.'});
