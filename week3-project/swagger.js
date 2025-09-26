@@ -9,7 +9,7 @@ const doc = {
     title: 'My API',
     description: 'Description'
   },
-  host: 'https://adoption-api-l5kj.onrender.com',
+  host: 'adoption-api-l5kj.onrender.com',
   schemes: ['https']
 };
 
