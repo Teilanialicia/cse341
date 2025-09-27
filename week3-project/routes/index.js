@@ -1,6 +1,7 @@
 const router = require('express').Router();
 
 router.use('/animals', require('./animal'));
+router.use('/user', require('./user'));
 
 // Swagger/api-docs
 router.use('/', require('./swagger'));

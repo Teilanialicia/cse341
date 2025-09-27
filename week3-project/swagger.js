@@ -10,7 +10,9 @@ const doc = {
     description: 'Description'
   },
   host: 'adoption-api-l5kj.onrender.com',
+  //host: 'localhost:8080',
   schemes: ['https']
+  //schemes: ['http']
 };
 
 const outputFile = './swagger-output.json';

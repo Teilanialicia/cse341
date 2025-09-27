@@ -3,10 +3,38 @@ const Animal = require('../models/Animal.js');
 // Post /animals/
 const addAnimal = async (req, res) => {
     //#swagger.tags=['Adoption']
+    const name = req.body.name;
+    const species = req.body.species;
+    const status = req.body.status;
+    const age = req.body.age;
+    const breed = req.body.breed;
+    const gender = req.body.gender;
+    const birthday = req.body.birthday;
+    const description = req.body.description;
+    const weight = req.body.weight;
+    const color = req.body.color;
+    const vaccinations = req.body.vaccinations;
+    const spayedNeutered = req.body.spayedNeutered;
+    const goodWith = req.body.goodWith;
+    const specialNeeds = req.body.specialNeeds;
 
-    // Attempt to add the animal
     try {
-        const newAnimal = new Animal(req.body);
+        const newAnimal = new Animal({
+            name,
+            species,
+            status,
+            age,
+            breed,
+            gender,
+            birthday,
+            description,
+            weight,
+            color,
+            vaccinations,
+            spayedNeutered,
+            goodWith,
+            specialNeeds
+        });
         await newAnimal.save();
         res.json(newAnimal);
     } catch (err) {
@@ -26,8 +54,8 @@ const addAnimal = async (req, res) => {
 const getAllAnimals = async (req, res) => {
     //#swagger.tags=['Adoption']
     try {
-        const contacts = await Animal.find({});
-        res.status(200).json(contacts);
+        const animals = await Animal.find({});
+        res.status(200).json(animals);
     } catch (err) {
         console.error(err);
         res.status(500).json({message: 'Failed to fetch animals', error: err});
