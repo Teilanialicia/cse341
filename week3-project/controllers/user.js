@@ -64,11 +64,28 @@ const getSingleUserById = async (req, res) => {
 // PUT /users/:id
 const updateUser = async (req, res) => {
     //#swagger.tags=['Users']
+        const name = req.body.name;
+        const email = req.body.email;
+        const phone = req.body.phone;
+        const street = req.body.address?.street;
+        const city = req.body.address?.city;
+        const state = req.body.address?.state;
+        const zip = req.body.address?.zip;
     try {
         const updatedUser = await User.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true, runValidators: true }
+        req.params.id,
+        {
+            name,
+            email,
+            phone,
+            address: {
+            street: address?.street,
+            city: address?.city,
+            state: address?.state,
+            zip: address?.zip,
+            },
+        },
+        { new: true, runValidators: true }
         );
 
         if (!updatedUser) {
