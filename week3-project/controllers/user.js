@@ -67,10 +67,7 @@ const updateUser = async (req, res) => {
         const name = req.body.name;
         const email = req.body.email;
         const phone = req.body.phone;
-        const street = req.body.address?.street;
-        const city = req.body.address?.city;
-        const state = req.body.address?.state;
-        const zip = req.body.address?.zip;
+        const address = req.body.address;
     try {
         const updatedUser = await User.findByIdAndUpdate(
         req.params.id,
@@ -78,12 +75,7 @@ const updateUser = async (req, res) => {
             name,
             email,
             phone,
-            address: {
-            street: address?.street,
-            city: address?.city,
-            state: address?.state,
-            zip: address?.zip,
-            },
+            address,
         },
         { new: true, runValidators: true }
         );

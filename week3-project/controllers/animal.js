@@ -140,7 +140,7 @@ const deleteById = async (req, res) => {
         if (!animal)
             throw new Error();
 
-        return res.status(200).json({error: `Deleted animal with id: ${req.params.id}`});
+        return res.status(200).json({message: `Deleted animal with id: ${req.params.id}`});
     } catch (err) {
         return res.status(400).json({message: 'No animal found with that id. No delete occurred.'});
     }
