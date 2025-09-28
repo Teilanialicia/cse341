@@ -55,6 +55,57 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "species": {
+                  "example": "any"
+                },
+                "status": {
+                  "example": "any"
+                },
+                "age": {
+                  "example": "any"
+                },
+                "breed": {
+                  "example": "any"
+                },
+                "gender": {
+                  "example": "any"
+                },
+                "birthday": {
+                  "example": "any"
+                },
+                "description": {
+                  "example": "any"
+                },
+                "weight": {
+                  "example": "any"
+                },
+                "color": {
+                  "example": "any"
+                },
+                "vaccinations": {
+                  "example": "any"
+                },
+                "spayedNeutered": {
+                  "example": "any"
+                },
+                "goodWith": {
+                  "example": "any"
+                },
+                "specialNeeds": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {

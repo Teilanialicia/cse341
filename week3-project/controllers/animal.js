@@ -78,10 +78,40 @@ const getSingleById = async (req, res) => {
 // PUT /animals/:id
 const updateAnimal = async (req, res) => {
 //#swagger.tags=['Adoption']
+    const name = req.body.name;
+    const species = req.body.species;
+    const status = req.body.status;
+    const age = req.body.age;
+    const breed = req.body.breed;
+    const gender = req.body.gender;
+    const birthday = req.body.birthday;
+    const description = req.body.description;
+    const weight = req.body.weight;
+    const color = req.body.color;
+    const vaccinations = req.body.vaccinations;
+    const spayedNeutered = req.body.spayedNeutered;
+    const goodWith = req.body.goodWith;
+    const specialNeeds = req.body.specialNeeds;
+
     try {
         const updatedAnimal = await Animal.findByIdAndUpdate(
         req.params.id,
-        req.body,
+        {
+            name,
+            species,
+            status,
+            age,
+            breed,
+            gender,
+            birthday,
+            description,
+            weight,
+            color,
+            vaccinations,
+            spayedNeutered,
+            goodWith,
+            specialNeeds
+        },
         {
             new: true,
             runValidators: true
