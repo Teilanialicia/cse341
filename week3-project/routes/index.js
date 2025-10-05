@@ -2,6 +2,8 @@ const router = require('express').Router();
 
 router.use('/animals', require('./animal'));
 router.use('/user', require('./user'));
+router.use('/github', require('./github'));
+router.use('/account', require('./account'));
 
 // Swagger/api-docs
 router.use('/', require('./swagger'));
