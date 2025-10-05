@@ -12,8 +12,8 @@ const connectDb = require("./routes/data/database");
 const cors = require('cors');
 const passport = require('passport');
 const session = require('express-session');
+const MemoryStore = require('memorystore')(session);
 const GitHubStrategy = require('passport-github2').Strategy;
-
 
 /* ***********************
  * Local Server Information
@@ -39,6 +39,10 @@ app.use(cors());
  *************************/
 // Set up the session and save a cookie named secret (ideally it should be some random letters)
 app.use(session({
+  cookie: { maxAge: 86400000},
+    store: new MemoryStore({
+      checkPeriod: 86400000 // prune expired entries every 24h
+  }),
   secret: "secret",
   resave: false,
   saveUninitialized: true,
